@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Button</title>
+    <style>
+        :root {
+            --bg-1: #09111a;
+            --bg-2: #10283b;
+            --bg-3: #2a4f6d;
+            --glass-fill: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.45);
+            --glass-edge: rgba(255, 255, 255, 0.9);
+            --text: #f4fbff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(1300px 700px at 15% 10%, #67d2ff33, transparent 60%),
+                radial-gradient(1000px 600px at 85% 90%, #73b4ff2e, transparent 60%),
+                linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+            overflow: hidden;
+        }
+
+        .liquid-btn {
+            position: relative;
+            border: 0;
+            outline: 0;
+            cursor: pointer;
+            padding: 18px 48px;
+            border-radius: 999px;
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            background: transparent;
+            isolation: isolate;
+            transition: transform 0.28s ease, letter-spacing 0.28s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .liquid-btn::before,
+        .liquid-btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        .liquid-btn::before {
+            background:
+                linear-gradient(135deg, #ffffff66 0%, #ffffff08 45%, #ffffff1f 100%),
+                var(--glass-fill);
+            border: 1px solid var(--glass-border);
+            box-shadow:
+                0 1px 0 0 var(--glass-edge) inset,
+                0 -10px 26px #6ed2ff24 inset,
+                0 22px 45px #00000044,
+                0 0 0 1px #ffffff1f;
+            backdrop-filter: blur(14px) saturate(150%);
+            -webkit-backdrop-filter: blur(14px) saturate(150%);
+        }
+
+        .liquid-btn::after {
+            inset: 2px;
+            background:
+                radial-gradient(70% 170% at 18% -30%, #ffffffde 0%, #ffffff00 65%),
+                radial-gradient(45% 80% at 86% 120%, #7cdfff66 0%, #7cdfff00 70%);
+            opacity: 0.95;
+            transition: opacity 0.25s ease;
+            mix-blend-mode: screen;
+        }
+
+        .liquid-btn .label {
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 1px 8px #6fd5ff4a;
+        }
+
+        .liquid-btn .flow {
+            position: absolute;
+            inset: -20% -15%;
+            border-radius: inherit;
+            z-index: 1;
+            filter: blur(10px) url(#goo);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .liquid-btn .flow span {
+            position: absolute;
+            width: 34%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at 28% 22%, #fff, #92e6ff 58%, #2f95bf 100%);
+            opacity: 0.78;
+            animation: drift 5.8s ease-in-out infinite;
+        }
+
+        .liquid-btn .flow span:nth-child(1) {
+            top: 8%;
+            left: 8%;
+            animation-delay: -0.7s;
+        }
+
+        .liquid-btn .flow span:nth-child(2) {
+            top: 52%;
+            left: 38%;
+            width: 30%;
+            animation-duration: 6.6s;
+        }
+
+        .liquid-btn .flow span:nth-child(3) {
+            top: 20%;
+            right: 9%;
+            width: 26%;
+            animation-duration: 5.1s;
+            animation-delay: -2s;
+        }
+
+        .liquid-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            letter-spacing: 0.03em;
+        }
+
+        .liquid-btn:hover::after {
+            opacity: 1;
+        }
+
+        .liquid-btn:active {
+            transform: translateY(0) scale(0.99);
+        }
+
+        @keyframes drift {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            40% {
+                transform: translate(12%, -8%) scale(1.1);
+            }
+            65% {
+                transform: translate(-9%, 10%) scale(0.93);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="liquid-btn" aria-label="Liquid glass button">
+        <span class="flow" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <span class="label">Liquid Glass</span>
+    </button>
+
+    <svg width="0" height="0" aria-hidden="true" focusable="false">
+        <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+            <feColorMatrix
+                in="blur"
+                mode="matrix"
+                values="1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 24 -12"
+                result="goo"
+            />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+        </filter>
+    </svg>
+</body>
+</html>

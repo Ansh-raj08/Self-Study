@@ -119,14 +119,31 @@
 // name: Ana
 // role: admin
 
-function add(a, b) {
-    a = 10
-    b = 5
-    return a + b
-}
-console.log(add())
+// function add(a, b) {
+//     a = 10
+//     b = 5
+//     return a + b
+// }
+// console.log(add())
 
-a = 11
-b = 5
-const addz = (a, b) => a + b;
-console.log(addz(a,b))
+// a = 11
+// b = 5
+// const addz = (a, b) => a + b;
+// console.log(addz(a,b))
+
+// ...existing code...
+
+// DOM class manipulation examples
+const element = document.querySelector(".box");
+
+// add(): add a class to element
+element.classList.add("active");
+element.classList.add("highlight", "visible"); // add multiple classes
+
+// remove(): remove a class from element
+element.classList.remove("active");
+element.classList.remove("highlight", "visible"); // remove multiple classes
+
+// toggle(): add class if not present, remove if present
+element.classList.toggle("active"); // adds if missing, removes if present
+element.classList.toggle("disabled"); // toggles on each call
