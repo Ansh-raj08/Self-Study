@@ -26,3 +26,16 @@ if __name__ == "__main__":
     print(s.twoSum([2, 7, 11, 15], 9))   # [0, 1]
     print(s.twoSum([3, 2, 4], 6))        # [1, 2]
     print(s.twoSum([3, 3], 6))           # [0, 1]
+
+def is_palindrome(n):
+    """Check if a number is palindrome"""
+    s = str(abs(n))
+    return s == s[::-1]
+
+# Test cases
+print(is_palindrome(121))    # True
+print(is_palindrome(-121))   # False (negative)
+print(is_palindrome(123))    # False
+print(is_palindrome(1221))   # True
+print(is_palindrome(0))      # True
+print(is_palindrome(10))     # False
